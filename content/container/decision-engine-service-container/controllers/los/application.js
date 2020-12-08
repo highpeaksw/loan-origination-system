@@ -291,7 +291,15 @@ async function updateApplication(req, res, next) {
       date: 'date',
       boolean: 'boolean',
     };
+
     if (req.query && req.query.type === 'swimlane' && req.controllerData.los_statuses) {
+    const response = await fetch(`http://127.0.0.1:8080/v1/rest/digify/can_move_status?source_index=${Number.parseInt(req.body.source_idx)}&destination_index=${Number.parseInt(req.body.destination_idx)}`);
+    const logResponse = await response.json();
+    console.log(logResponse);
+    if(!logResponse.result)
+    {
+      throw Error("Can't Move");
+    }
       if (req.body && req.body.source_idx !== req.body.destination_idx) updateOptions = {
         query: { _id: req.body.entity_id, },
         updatedoc: {
