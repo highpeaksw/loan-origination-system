@@ -293,14 +293,24 @@ async function updateApplication(req, res, next) {
     };
 
     if (req.query && req.query.type === 'swimlane' && req.controllerData.los_statuses) {
-    const response = await fetch(`http://127.0.0.1:8080/v1/rest/digify/can_move_status?source_index=${Number.parseInt(req.body.source_idx)}&destination_index=${Number.parseInt(req.body.destination_idx)}`);
-    const logResponse = await response.json();
-    console.log(logResponse);
-    if(!logResponse.result)
-    {
-      throw Error("Can't Move");
-    }
-      if (req.body && req.body.source_idx !== req.body.destination_idx) updateOptions = {
+      const response = await fetch(`http://127.0.0.1:8080/v1/rest/digify/can_move_status?source_index=${Number.parseInt(req.body.source_idx)}&destination_index=${Number.parseInt(req.body.destination_idx)}`);
+      const logResponse = await response.json();
+      console.log(logResponse);
+      if(!logResponse.result)
+      {
+        // const error = new Error();
+        // error.code=400;
+        // error.message="Cant Move";
+        // throw error;
+        // return res.status(400).send({
+        //   error:"Uff"
+        // })
+        return res.status(400).send({
+          message: 'Organization not found. If you don’t know your organization name you can recover it.',
+        });
+        
+      }
+      else if (req.body && req.body.source_idx !== req.body.destination_idx) updateOptions = {
         query: { _id: req.body.entity_id, },
         updatedoc: {
           status: req.controllerData.los_statuses[ req.body.destination_idx ],
@@ -308,7 +318,8 @@ async function updateApplication(req, res, next) {
           [ 'user.updater' ]: `${user.first_name} ${user.last_name}`,
         },
       };
-    } else if (req.query && req.query.type === 'patch_loan_info') {
+    } 
+    else if (req.query && req.query.type === 'patch_loan_info') {
       const { value, value_type, value_category } = req.body;
       if (req.body.name && req.body.name !== 'TypeError') {
         updateOptions = {
