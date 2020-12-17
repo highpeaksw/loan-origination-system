@@ -244,7 +244,7 @@ async function formatApplicationsIndexTable(req) {
           updatedat,
           _id: row._id,
           title: row.title,
-          loan_amount: row.loan_amount ? numeral(row.loan_amount).format('$0,0') : '',
+          loan_amount: row.loan_amount ? numeral(row.loan_amount).format('Re0,0') : '',
           status: row.status ? row.status.name : '',
         };
       });
@@ -426,7 +426,7 @@ async function formatApplicationDetail(req) {
           return acc;
         }, []);
 
-        const loan_amount = (application && application.loan_amount !== undefined) ? numeral(application.loan_amount).format('$0,0') : undefined;
+        const loan_amount = (application && application.loan_amount !== undefined) ? numeral(application.loan_amount).format('Re0,0') : undefined;
         req.controllerData.application = Object.assign({}, application, {
           createdat,
           updatedat,
@@ -727,7 +727,7 @@ async function formatCompanyDetail(req) {
       if (company.company_applications && company.company_applications.rows.length) {
         company.company_applications.rows = company.company_applications.rows.map(application => ({
           _id: application._id,
-          loan_amount: application.loan_amount ? numeral(application.loan_amount).format('$0,0') : '',
+          loan_amount: application.loan_amount ? numeral(application.loan_amount).format('Re0,0') : '',
           createdat: transformhelpers.formatDateNoTime(application.createdat, req.user.time_zone),
           product: application.product ? application.product.name : '',
           status: application.status.name,
@@ -769,7 +769,7 @@ async function formatPersonDetail(req) {
       if (person.person_applications && person.person_applications.rows.length) {
         person.person_applications.rows = person.person_applications.rows.map(application => ({
           _id: application._id,
-          loan_amount: numeral(application.loan_amount).format('$0,0'),
+          loan_amount: numeral(application.loan_amount).format('Re0,0'),
           createdat: transformhelpers.formatDateNoTime(application.createdat, req.user.time_zone),
           product: application.product.name,
           status: application.status.name,
@@ -833,7 +833,7 @@ async function formatApplicationSwimlane(req) {
             teamMemberCount: (application.team_members && application.team_members.length) ? application.team_members.length : 0,
             image: (application.team_members && application.team_members.length && userImageMap[ application.team_members[ 0 ].toString() ]) ? userImageMap[ application.team_members[ 0 ].toString() ] : REACTAPPSETTINGS.default_user_image,
             amountNum: application.loan_amount ? parseFloat(numeral(application.loan_amount)._value) : 0,
-            amount: application.loan_amount ? numeral(application.loan_amount).format('$0,0') : '',
+            amount: application.loan_amount ? numeral(application.loan_amount).format('Re0,0') : '',
             date: transformhelpers.formatDateNoTime(application.createdat),
             footer: (application.labels && application.labels.length) ? {
               component: 'div',
@@ -3751,7 +3751,7 @@ async function formatIntermediaryDetail(req) {
       // if (intermediary.intermediary_applications && intermediary.intermediary_applications.rows.length) {
       //   intermediary.intermediary_applications.rows = intermediary.intermediary_applications.rows.map(application => ({
       //     _id: application._id,
-      //     loan_amount: application.loan_amount ? numeral(application.loan_amount).format('$0,0') : '',
+      //     loan_amount: application.loan_amount ? numeral(application.loan_amount).format('Re0,0') : '',
       //     createdat: transformhelpers.formatDateNoTime(application.createdat, req.user.time_zone),
       //     product: application.product ? application.product.name : '',
       //     status: application.status.name,
@@ -3832,7 +3832,7 @@ async function formatIntermediaryApplicationSwimlane(req) {
             teamMemberCount: (application.team_members && application.team_members.length) ? application.team_members.length : 0,
             image: (application.team_members && application.team_members.length && userImageMap[ application.team_members[ 0 ].toString() ]) ? userImageMap[ application.team_members[ 0 ].toString() ] : REACTAPPSETTINGS.default_user_image,
             amountNum: application.loan_amount ? parseFloat(numeral(application.loan_amount)._value) : 0,
-            amount: application.loan_amount ? numeral(application.loan_amount).format('$0,0') : '',
+            amount: application.loan_amount ? numeral(application.loan_amount).format('Re0,0') : '',
             date: transformhelpers.formatDateNoTime(application.createdat),
             footer: (application.labels && application.labels.length) ? {
               component: 'div',

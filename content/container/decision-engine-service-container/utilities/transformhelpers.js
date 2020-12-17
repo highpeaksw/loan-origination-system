@@ -197,7 +197,7 @@ function formatCurrencyNoCents(num) {
   try {
     if (num || num === 0) {
       num = (typeof num !== 'number') ? Number(num) : num;
-      return numeral(num).format('$0,0');
+      return numeral(num).format('Re0,0');
     } else {
       return num;
     }
