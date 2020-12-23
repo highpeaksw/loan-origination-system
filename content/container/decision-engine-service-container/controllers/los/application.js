@@ -12,6 +12,7 @@ const losControllerUtil = utilities.controllers.los;
 const losTransformUtil = utilities.transforms.los;
 const path = require('path');
 const Busboy = require('busboy');
+const alert = require('alert');
 
 async function createApplication(req, res, next) {
   try {
@@ -291,16 +292,27 @@ async function updateApplication(req, res, next) {
       date: 'date',
       boolean: 'boolean',
     };
+
     if (req.query && req.query.type === 'swimlane' && req.controllerData.los_statuses) {
-      if (req.body && req.body.source_idx !== req.body.destination_idx) updateOptions = {
+        if (req.body && req.body.source_idx !== req.body.destination_idx) updateOptions = {
         query: { _id: req.body.entity_id, },
         updatedoc: {
-          status: req.controllerData.los_statuses[ req.body.destination_idx ],
-          updatedat: new Date(),
-          [ 'user.updater' ]: `${user.first_name} ${user.last_name}`,
-        },
-      };
-    } else if (req.query && req.query.type === 'patch_loan_info') {
+            status: req.controllerData.los_statuses[ req.body.destination_idx ],
+            updatedat: new Date(),
+            [ 'user.updater' ]: `${user.first_name} ${user.last_name}`,
+        }};
+        const response = await fetch(`http://192.168.43.36:8080/v1/rest/digify/can_move_status?source_index=${Number.parseInt(req.body.source_idx)}&destination_index=${Number.parseInt(req.body.destination_idx)}`);
+        const logResponse = await response.json();
+        if(!logResponse.result) {
+            alert('Cannot move the card backwards. Please refresh the page');
+            return res.status(400).send({
+                status_code: 400,
+                status_message: 'Error',
+                error: 'Cannot move',
+            })
+        }
+    }
+    else if (req.query && req.query.type === 'patch_loan_info') {
       const { value, value_type, value_category } = req.body;
       if (req.body.name && req.body.name !== 'TypeError') {
         updateOptions = {
