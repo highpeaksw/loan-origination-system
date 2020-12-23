@@ -304,6 +304,7 @@ async function updateApplication(req, res, next) {
         const response = await fetch(`http://192.168.43.36:8080/v1/rest/digify/can_move_status?source_index=${Number.parseInt(req.body.source_idx)}&destination_index=${Number.parseInt(req.body.destination_idx)}`);
         const logResponse = await response.json();
         if(!logResponse.result.canMove) {
+          console.log('response',logResponse)
             alert(logResponse.result.reason);
             return res.status(400).send({
                 status_code: 400,
