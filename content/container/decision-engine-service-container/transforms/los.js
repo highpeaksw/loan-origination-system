@@ -1061,6 +1061,8 @@ async function formatApplicationSwimlane(req) {
                 width: '100%',
                 display: 'flex',
                 flexDirection: 'column',
+                pointerEvents: 'none',
+                cursor: 'auto'
               },
             },
             draggableProps: {
@@ -1090,6 +1092,7 @@ async function formatApplicationSwimlane(req) {
                 fontWeight: '700',
                 fontSize: '14px',
                 padding: '0px',
+                pointerEvents: 'auto'
               },
             },
             droppableList,
