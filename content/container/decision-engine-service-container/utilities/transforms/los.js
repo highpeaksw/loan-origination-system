@@ -1489,34 +1489,35 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                 marginRight: '1rem',
               },
             },
-          }, {
-            component: 'ResponsiveButton',
-            children: 'REJECT APPLICATION',
-            thisprops: {
-              onclickPropObject: [ 'formdata', ],
-              // status_name: ['app']
-            },
-            comparisonprops: [ {
-              left: [ 'formdata', 'status_name', ],
-              operation: 'dneq',
-              right: 'Approved',
-            }, {
-              left: [ 'formdata', 'status_name', ],
-              operation: 'dneq',
-              right: 'Rejected',
-            }, ],
-            props: {
-              onClick: 'func:this.props.createModal',
-              onclickProps: {
-                title: 'Reject Loan Application',
-                pathname: '/los/applications/:id/close_loan_application',
-                params: [ { 'key': ':id', 'val': '_id', }, ],
-              },
-              buttonProps: {
-                color: 'isDanger',
-              },
-            },
           },
+        // {
+        //     component: 'ResponsiveButton',
+        //     children: 'REJECT APPLICATION',
+        //     thisprops: {
+        //       onclickPropObject: [ 'formdata', ],
+        //       // status_name: ['app']
+        //     },
+        //     comparisonprops: [ {
+        //       left: [ 'formdata', 'status_name', ],
+        //       operation: 'dneq',
+        //       right: 'Approved',
+        //     }, {
+        //       left: [ 'formdata', 'status_name', ],
+        //       operation: 'dneq',
+        //       right: 'Rejected',
+        //     }, ],
+        //     props: {
+        //       onClick: 'func:this.props.createModal',
+        //       onclickProps: {
+        //         title: 'Reject Loan Application',
+        //         pathname: '/los/applications/:id/close_loan_application',
+        //         params: [ { 'key': ':id', 'val': '_id', }, ],
+        //       },
+        //       buttonProps: {
+        //         color: 'isDanger',
+        //       },
+        //     },
+        //   },
           ],
           right: [ {
             component: 'ResponsiveButton',

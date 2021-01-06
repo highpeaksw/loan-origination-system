@@ -347,8 +347,6 @@ async function updateApplication(req, res, next) {
         const logResponse = await response.json();
         if(!logResponse.result.canMove) {
             return res.status(400).send({ message: logResponse.result.reason});
-        } else {
-            return res.status(200).send({ message: 'success!!'});
         }
     }
     await Application.model.updateOne(updateOptions.query, updateOptions.updatedoc);
