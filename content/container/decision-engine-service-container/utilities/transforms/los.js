@@ -1423,13 +1423,12 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
             'method': 'PUT',
           },
           params: [ { key: ':id', val: '_id', }, ],
-          successCallback: 'func:this.props.createNotification',
-          responseCallback: 'func:this.props.refresh',
-          successProps: {
+          successCallback: ['func:this.props.refresh', 'func:this.props.createNotification', ],
+          successProps: [ null, {
             type: 'success',
             text: 'Changes saved successfully!',
             timeout: 10000,
-          },
+          },],
         },
       },
       renderFormElements: {
@@ -1603,7 +1602,7 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
               type: 'maskedinput',
               name: 'loan_amount',
               leftIcon: 'fas fa-rupee-sign',
-              placeholder: undefined,
+              placeholder: '₹',
               createNumberMask: true,
               passProps: {
                 mask: 'func:window.testMaskDollarInput',

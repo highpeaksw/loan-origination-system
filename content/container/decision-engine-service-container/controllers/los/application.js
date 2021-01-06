@@ -331,23 +331,19 @@ async function updateApplication(req, res, next) {
         },
       };
     } else {
-      const response = await fetch(`http://127.0.0.1:8080/v1/rest/digify/can_change_status?status_id=wtwyuqiqoqopqpjw`);
-      const logResponse = await response.json();
-      console.log(logResponse);
-      if(!logResponse.result.canMove)
-      {
-        return res.status(400).send({
-          message:logResponse.result.reason
-        })
-      }
-      // if (true) return res.status(400).send({
-      //   message: 'Organization not found. If you don’t know your organization name you can recover it.',
-      // });
-      updateOptions = {
-        query: { _id: req.params.id, },
-        updatedoc: req.body,
-      };
-      const response = await fetch(`http://192.168.43.36:8080/v1/rest/digify/can_change_status?status_id=wtwyuqiqoqopqpjw`);
+        const Application = periodic.datas.get('standard_losapplication');
+        const user = req.user || {};
+        const organization = (user && user.association && user.association.organization && user.association.organization._id) ? user.association.organization._id.toString() : 'organization';
+        let populate = [];
+        if (req.query && req.query.populate) {
+            if (req.query.populate === 'all') populate = [ { path: 'product' }, { path: 'team_members' }, { path: 'status' } ];
+        }
+        const application = await Application.model.findOne({ _id: req.params.id, organization, }).populate(populate).lean();
+        updateOptions = {
+            query: { _id: req.params.id, },
+            updatedoc: req.body,
+        };
+        const response = await fetch(`http://192.168.43.36:8080/v1/rest/digify/can_move_status_of_app?source_index=${application.status}&destination_index=${req.body.status}`);
         const logResponse = await response.json();
         if(!logResponse.result.canMove) {
             return res.status(400).send({ message: logResponse.result.reason});
