@@ -331,6 +331,18 @@ async function updateApplication(req, res, next) {
         },
       };
     } else {
+      const response = await fetch(`http://127.0.0.1:8080/v1/rest/digify/can_change_status?status_id=wtwyuqiqoqopqpjw`);
+      const logResponse = await response.json();
+      console.log(logResponse);
+      if(!logResponse.result.canMove)
+      {
+        return res.status(400).send({
+          message:logResponse.result.reason
+        })
+      }
+      // if (true) return res.status(400).send({
+      //   message: 'Organization not found. If you don’t know your organization name you can recover it.',
+      // });
       updateOptions = {
         query: { _id: req.params.id, },
         updatedoc: req.body,
@@ -346,6 +358,7 @@ async function updateApplication(req, res, next) {
     await Application.model.updateOne(updateOptions.query, updateOptions.updatedoc);
     next();
   } catch (e) {
+    console.log(e);
     next(e);
   }
 }
