@@ -8,6 +8,7 @@ const Promisie = require('promisie');
 const capitalize = require('capitalize');
 const mathjs = require('mathjs');
 const numeral = require('numeral');
+const locale = require('numeral/locales');
 const RoutingNumberLookup = require('routing-number-lookup');
 const periodic = require('periodicjs');
 const logger = periodic.logger;
@@ -183,7 +184,7 @@ function formatCurrency(num) {
   try {
     if (num || num === 0) {
       num = (typeof num !== 'number') ? Number(num) : num;
-      return numeral(num).format('$0,0.00');
+      return numeral(num).format('0,0.00');
     } else {
       return num;
     }
@@ -197,7 +198,7 @@ function formatCurrencyNoCents(num) {
   try {
     if (num || num === 0) {
       num = (typeof num !== 'number') ? Number(num) : num;
-      return numeral(num).format('$0,0');
+      return numeral(num).format('0,0');
     } else {
       return num;
     }
@@ -811,7 +812,7 @@ function transformOfferProductName(offer) {
  */
 function unformatCurrency(str) {
   if (!str) return 0;
-  else return Number(str.replace(/[\$\,]/g, ''));
+  else return Number(str.replace(/[\₹\,]/g, ''));
 }
 
 /**
@@ -843,8 +844,8 @@ function formatCollateralInfo(collateral) {
 
 /**
  * Coerces the CSV row value
- * 
- * @param {*} value 
+ *
+ * @param {*} value
  */
 function formatCSVRowValue(value) {
   if (/^\[.*\]$/.test(value)) {
@@ -1142,7 +1143,7 @@ function generatePredictorVariableCard(name, variable_config, idx) {
         //     },
         //   },
         //   sortable: false,
-        // }, 
+        // },
       ],
     }, ],
   };

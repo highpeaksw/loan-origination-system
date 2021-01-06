@@ -69,7 +69,7 @@ function formatByValueType(options) {
   try {
     switch (value_type) {
       case 'monetary':
-        formatted = numeral(value).format('$0,0.00');
+        formatted = numeral(value).format('0,0.00');
         break;
       case 'percentage':
         formatted = numeral(value).format('0,0.[00]%');
@@ -1423,13 +1423,13 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
             'method': 'PUT',
           },
           params: [ { key: ':id', val: '_id', }, ],
-          successCallback: [ 'func:this.props.refresh', 'func:this.props.createNotification', ],
-          successProps: [ null, {
+          successCallback: 'func:this.props.createNotification',
+          responseCallback: 'func:this.props.refresh',
+          successProps: {
             type: 'success',
             text: 'Changes saved successfully!',
             timeout: 10000,
           },
-          ],
         },
       },
       renderFormElements: {
@@ -1602,7 +1602,7 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
             formGroupCardLeft: [{
               type: 'maskedinput',
               name: 'loan_amount',
-              leftIcon: 'fas fa-usd-circle',
+              leftIcon: 'fas fa-rupee-sign',
               placeholder: undefined,
               createNumberMask: true,
               passProps: {
@@ -2138,7 +2138,7 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                 },
               },
             },],
-          },    
+          },
           ],
         },
       ],

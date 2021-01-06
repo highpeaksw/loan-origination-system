@@ -114,7 +114,7 @@ module.exports = {
                 formElements: [
                   {
                     type: 'maskedinput',
-                    leftIcon: 'fas fa-usd-circle',
+                    leftIcon: 'fas fa-rupee-sign',
                     name: 'loan_amount',
                     placeholder: undefined,
                     createNumberMask: true,
@@ -562,7 +562,7 @@ module.exports = {
                 formElements: [ {
                   type: 'maskedinput',
                   name: 'loan_amount',
-                  leftIcon: 'fas fa-usd-circle',
+                  leftIcon: 'fas fa-rupee-sign',
                   placeholder: undefined,
                   createNumberMask: true,
                   validateOnBlur: true,

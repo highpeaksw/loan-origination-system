@@ -12,7 +12,6 @@ const losControllerUtil = utilities.controllers.los;
 const losTransformUtil = utilities.transforms.los;
 const path = require('path');
 const Busboy = require('busboy');
-const alert = require('alert');
 
 async function createApplication(req, res, next) {
   try {
@@ -292,25 +291,15 @@ async function updateApplication(req, res, next) {
       date: 'date',
       boolean: 'boolean',
     };
-
     if (req.query && req.query.type === 'swimlane' && req.controllerData.los_statuses) {
-        if (req.body && req.body.source_idx !== req.body.destination_idx) updateOptions = {
-        query: { _id: req.body.entity_id, },
-        updatedoc: {
-            status: req.controllerData.los_statuses[ req.body.destination_idx ],
-            updatedat: new Date(),
-            [ 'user.updater' ]: `${user.first_name} ${user.last_name}`,
-        }};
-        const response = await fetch(`http://192.168.43.36:8080/v1/rest/digify/can_move_status?source_index=${Number.parseInt(req.body.source_idx)}&destination_index=${Number.parseInt(req.body.destination_idx)}`);
-        const logResponse = await response.json();
-        if(!logResponse.result.canMove) {
-            alert(logResponse.result.reason);
-            return res.status(400).send({
-                status_code: 400,
-                status_message: 'Error',
-                error: logResponse.result.reason,
-            })
-        }
+        // if (req.body && req.body.source_idx !== req.body.destination_idx)
+        //     updateOptions = {
+        //         query: { _id: req.body.entity_id, },
+        //         updatedoc: {
+        //             status: req.controllerData.los_statuses[ req.body.destination_idx ],
+        //             updatedat: new Date(),
+        //             [ 'user.updater' ]: `${user.first_name} ${user.last_name}`,
+        //         }};
     }
     else if (req.query && req.query.type === 'patch_loan_info') {
       const { value, value_type, value_category } = req.body;
@@ -346,6 +335,13 @@ async function updateApplication(req, res, next) {
         query: { _id: req.params.id, },
         updatedoc: req.body,
       };
+      const response = await fetch(`http://192.168.43.36:8080/v1/rest/digify/can_change_status?status_id=wtwyuqiqoqopqpjw`);
+        const logResponse = await response.json();
+        if(!logResponse.result.canMove) {
+            return res.status(400).send({ message: logResponse.result.reason});
+        } else {
+            return res.status(200).send({ message: 'success!!'});
+        }
     }
     await Application.model.updateOne(updateOptions.query, updateOptions.updatedoc);
     next();

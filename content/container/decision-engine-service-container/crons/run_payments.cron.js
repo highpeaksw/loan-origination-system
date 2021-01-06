@@ -76,7 +76,7 @@ let taxTable = {
 const getAllOrgs = async function () {
   try {
     let orgs = await Organization.model.find({});
-    return orgs;      
+    return orgs;
   } catch (err) {
     console.log({ err, });
   }
@@ -171,7 +171,7 @@ const chargeCards = async function (organizations) {
     let totalCharge = (payment_amount + Number(total_tax_owed));
     organizations[org].charge = await stripe.charges.create({
       amount: Math.round(totalCharge * 100),
-      currency: 'usd',
+      currency: 'rupee',
       source: customer.default_source,
       customer: customer.id,
       description: 'Payment',
@@ -292,10 +292,10 @@ const sendSuccessEmail = async function (currentOrg) {
         hostname: periodic.settings.application.hostname || periodic.settings.name,
         url: periodic.settings.application.url,
         protocol: periodic.settings.application.protocol,
-        amount_paid: Numeral(charge.amount / 100).format('$0,0.00'),
-        fees: Numeral(fees).format('$0,0.00'),
+        amount_paid: `₹${Numeral(charge.amount / 100).format('0,0.00')}`,
+        fees: `₹${Numeral(fees).format('0,0.00')}`,
         date_paid: moment().format('L'),
-        total_tax_owed: Numeral(currentOrg.total_tax_owed).format('$0,0.00'),
+        total_tax_owed: `₹${Numeral(currentOrg.total_tax_owed).format('0,0.00')}`,
         payment_method: `${charge.source.card.brand} - ${charge.source.card.last4}`,
       },
     };
@@ -308,7 +308,7 @@ const sendSuccessEmail = async function (currentOrg) {
 const sendFailEmail = async function (currentOrg) {
   try {
     let charge = currentOrg.charge;
-    
+
     const email = {
       from: periodic.settings.periodic.emails.server_from_address,
       // to: 'mark@digifi.io',
@@ -323,10 +323,10 @@ const sendFailEmail = async function (currentOrg) {
         basepath: '/company-settings/account/billing',
         url: periodic.settings.application.url,
         protocol: periodic.settings.application.protocol,
-        amount_paid: Numeral(charge.amount / 100).format('$0,0.00'),
-        fees: Numeral(fees).format('$0,0.00'),
+        amount_paid: `₹${Numeral(charge.amount / 100).format('0,0.00')}`,
+        fees: `₹${Numeral(fees).format('0,0.00')}`,
         date_paid: moment().format('L'),
-        total_tax_owed: Numeral(currentOrg.total_tax_owed).format('$0,0.00'),
+        total_tax_owed: `₹${Numeral(currentOrg.total_tax_owed).format('0,0.00')}`,
         payment_method: `${charge.source.card.brand} - ${charge.source.card.last4}`,
       },
     };
@@ -349,7 +349,7 @@ const updateOrganizations = async function (organizations) {
       isPatch: true,
     });
   }
-}; 
+};
 
 const mainFunc = async function (req, res, next) {
   try {

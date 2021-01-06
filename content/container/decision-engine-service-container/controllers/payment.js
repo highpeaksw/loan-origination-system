@@ -137,7 +137,7 @@ async function stageProcessingTransactionForCreation(req, res, next) {
     let requestNumber = 1;
     if (transactionParams.requestName === 'Machine Learning') requestNumber = req.controllerData.formatted_ml_cases.length;
     if (transactionParams.requestName === 'Decision Engine') requestNumber = req.controllerData.testcases.length;
-      
+
     let requestCost = parseFloat(Math.round((requestNumber * transactionParams.requestCost) * 100) / 100).toFixed(2);
     req.controllerData.transactionData = {
       item: `${transactionParams.requestName}: Interface ${transactionParams.requestType}`,
@@ -182,7 +182,7 @@ async function addTransaction(req, res, next) {
     .then(transaction => {
       req.controllerData.transaction = transaction;
       if(req.controllerData.results) req.controllerData.results.request_id = transaction.transaction_id;
-      if (req.controllerData.single_ml_result) req.controllerData.single_ml_result.request_id = transaction.transaction_id;      
+      if (req.controllerData.single_ml_result) req.controllerData.single_ml_result.request_id = transaction.transaction_id;
       return next();
     })
     .catch(err => {
@@ -211,7 +211,7 @@ async function addOrgAddress(req, res, next) {
     };
   }
   return next();
-} 
+}
 
 async function updateOrgBalance(req, res, next) {
   req.controllerData = req.controllerData || {};
@@ -237,7 +237,7 @@ async function getTransactions(req, res, next) {
     const numPages = Math.ceil(numItems / 50);
     let transactions = await Transaction.model.find(query).sort('-createdat').skip(skip).limit(50).lean();
     req.controllerData.transactions = transactions.reduce((returnData, transaction) => {
-      let amount = (transaction.amount < 0) ? `${Numeral(transaction.amount).format('$0,0.00')}` : `${Numeral(transaction.amount).format('$0,0.00')}`;
+      let amount = (transaction.amount < 0) ? `${Numeral(transaction.amount).format('Rs 0,0.00')}` : `${Numeral(transaction.amount).format('Rs 0,0.00')}`;
       returnData.push({
         date: transformhelpers.formatDate(transaction.createdat, req.user.time_zone),
         item: transaction.item,
@@ -283,7 +283,7 @@ async function getPaginatedTransactions(req,res,next) {
       req.controllerData = Object.assign({}, req.controllerData, {
         rows: transaction_docs.map(transaction => {
           transaction.date =  transformhelpers.formatDate(transaction.createdat, req.user.time_zone);
-          transaction.amount = (transaction.amount < 0) ? `${Numeral(transaction.amount).format('$0,0.00')}` : `${Numeral(transaction.amount).format('$0,0.00')}`;
+          transaction.amount = (transaction.amount < 0) ? `${Numeral(transaction.amount).format('Rs 0,0.00')}` : `${Numeral(transaction.amount).format('Rs 0,0.00')}`;
           return transaction;
         }),
         numPages,
@@ -370,7 +370,7 @@ async function setRequestTypeAndCost(req, res, next) {
     req.controllerData.transactionParams.requestCost = (rules_engine && rules_engine.pricing && rules_engine.pricing.api_individual) ? rules_engine.pricing.api_individual : 0.00;
     req.controllerData.transactionParams.requestCount = 1;
   }
-  
+
   if (req.originalUrl.includes('api/v2/rules_engine_batch')) {
     req.controllerData.transactionParams.requestName = 'Decision Engine';
     req.controllerData.transactionParams.requestCost = (rules_engine && rules_engine.pricing && rules_engine.pricing.api_batch && req.body && req.body.variables && req.body.variables.length) ? rules_engine.pricing.api_batch * req.body.variables.length : 0.00;
@@ -394,7 +394,7 @@ async function setRequestTypeAndCost(req, res, next) {
     let type = req.controllerData.transactionParams.requestType || null;
     req.controllerData.transactionParams.requestCost = (type === 'Individual') ? text_recognition.pricing.processing_individual * req.controllerData.fileCount : (type === 'Batch') ? text_recognition.pricing.processing_batch * req.controllerData.fileCount : 0.00;
   }
-  
+
   /* INTERFACE ENDPOINTS */
   if (req.originalUrl.includes('simulation')) {
     req.controllerData.transactionParams.requestName = 'Decision Engine';
@@ -408,7 +408,7 @@ async function setRequestTypeAndCost(req, res, next) {
     let type = req.controllerData.transactionParams.requestType || null;
     req.controllerData.transactionParams.requestCost = (type === 'Individual') ? machine_learning.pricing.processing_individual : (type === 'Batch') ? machine_learning.pricing.processing_batch : 0.00;
   }
-  
+
   // if (req.originalUrl.includes('ml_vision') || req.originalUrl.includes('ocr')) {
   //   req.controllerData.transactionParams.requestName = 'OCR Text Recognition';
   //   let type = req.controllerData.transactionParams.requestType || null;

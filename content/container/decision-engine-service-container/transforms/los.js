@@ -29,6 +29,8 @@ const simpleAsyncHeaderTitle = utilities.views.shared.component.layoutComponents
 const buttonAsyncHeaderTitle = utilities.views.shared.component.layoutComponents.buttonAsyncHeaderTitle;
 const documents = utilities.constants.documents;
 
+
+
 async function formatCreateApplication(req) {
   try {
     const Product = periodic.datas.get('standard_losproduct');
@@ -244,7 +246,8 @@ async function formatApplicationsIndexTable(req) {
           updatedat,
           _id: row._id,
           title: row.title,
-          loan_amount: row.loan_amount ? numeral(row.loan_amount).format('$0,0') : '',
+          loan_amount: row.loan_amount ? `₹${numeral(row.loan_amount).format('0,0')}`
+            : '',
           status: row.status ? row.status.name : '',
         };
       });
@@ -426,7 +429,7 @@ async function formatApplicationDetail(req) {
           return acc;
         }, []);
 
-        const loan_amount = (application && application.loan_amount !== undefined) ? numeral(application.loan_amount).format('$0,0') : undefined;
+        const loan_amount = (application && application.loan_amount !== undefined) ? `₹${numeral(application.loan_amount).format('0,0')}` : undefined;
         req.controllerData.application = Object.assign({}, application, {
           createdat,
           updatedat,
@@ -440,26 +443,26 @@ async function formatApplicationDetail(req) {
 
         const statusRequirements = application_status.status_requirements.map((requirement) => {
           if (application && application.processing && application.processing[requirement]) {
-            return { 
-              done: true, 
-              requirement, 
+            return {
+              done: true,
+              requirement,
               application_id: application._id.toString(),
               rowProps: {
                 className: 'task-complete',
-              }, 
-            }; 
+              },
+            };
           } else {
-            return { 
-              done: false, 
+            return {
+              done: false,
               requirement,
               application_id: application._id.toString(),
               rowProps: {
                 className: 'task-overdue',
-              }, 
+              },
             };
           }
         });
-        
+
         const allStatusRequirements = [];
         los_statuses.forEach(status => {
           if (status.active && status.name !== application_status.name) {
@@ -486,7 +489,7 @@ async function formatApplicationDetail(req) {
             });
           }
         })
-          
+
         req.controllerData.application.status_requirements = statusRequirements;
         req.controllerData.application.all_status_requirements = allStatusRequirements;
 
@@ -499,7 +502,7 @@ async function formatApplicationDetail(req) {
         }
 
         req.controllerData.formoptions = req.controllerData.formoptions || {};
-        
+
         if (req.controllerData.products) {
           const productDropdown = req.controllerData.products.map(product => ({
             label: product.name,
@@ -605,7 +608,7 @@ async function formatApplicationDetail(req) {
           options: Object.values(valueCategoriesMap),
           defaultValue: application_status.filter_categories,
         }, ];
-        
+
         const activeStatuses = req.controllerData.formoptions.status || [];
         const currentStatusIdx = activeStatuses.findIndex(activeStatus => activeStatus.value === application_status._id.toString());
         const finalStage = activeStatuses.length && currentStatusIdx === activeStatuses.length - 1;
@@ -614,7 +617,7 @@ async function formatApplicationDetail(req) {
           applicationId: req.controllerData.application._id.toString(),
           application_status,
           keyInfoLength: Object.keys(application.key_information).length,
-          finalStage, 
+          finalStage,
           statusId,
         }), ];
       }
@@ -651,7 +654,7 @@ async function formatApplicationLoanInformation(req) {
       }
       const searchString = req.query && req.query.query || '';
       application.key_information = application.key_information || {};
-      
+
       const loan_info = Object.entries(application.key_information).reduce((aggregate, [ name, detail, ], idx) => {
         if (valueCategories.length && valueCategories[0] !== '') {
           if (valueCategories.includes((detail.value_category || '')) && name.match(new RegExp(searchString, 'gi'))) {
@@ -727,7 +730,7 @@ async function formatCompanyDetail(req) {
       if (company.company_applications && company.company_applications.rows.length) {
         company.company_applications.rows = company.company_applications.rows.map(application => ({
           _id: application._id,
-          loan_amount: application.loan_amount ? numeral(application.loan_amount).format('$0,0') : '',
+          loan_amount: application.loan_amount ? `₹${numeral(application.loan_amount).format('0,0')}` : '',
           createdat: transformhelpers.formatDateNoTime(application.createdat, req.user.time_zone),
           product: application.product ? application.product.name : '',
           status: application.status.name,
@@ -769,7 +772,7 @@ async function formatPersonDetail(req) {
       if (person.person_applications && person.person_applications.rows.length) {
         person.person_applications.rows = person.person_applications.rows.map(application => ({
           _id: application._id,
-          loan_amount: numeral(application.loan_amount).format('$0,0'),
+          loan_amount: `₹${numeral(application.loan_amount).format('0,0')}`,
           createdat: transformhelpers.formatDateNoTime(application.createdat, req.user.time_zone),
           product: application.product.name,
           status: application.status.name,
@@ -833,7 +836,7 @@ async function formatApplicationSwimlane(req) {
             teamMemberCount: (application.team_members && application.team_members.length) ? application.team_members.length : 0,
             image: (application.team_members && application.team_members.length && userImageMap[ application.team_members[ 0 ].toString() ]) ? userImageMap[ application.team_members[ 0 ].toString() ] : REACTAPPSETTINGS.default_user_image,
             amountNum: application.loan_amount ? parseFloat(numeral(application.loan_amount)._value) : 0,
-            amount: application.loan_amount ? numeral(application.loan_amount).format('$0,0') : '',
+            amount: application.loan_amount ? `₹${numeral(application.loan_amount).format('0,0')}` : '',
             date: transformhelpers.formatDateNoTime(application.createdat),
             footer: (application.labels && application.labels.length) ? {
               component: 'div',
@@ -3039,7 +3042,7 @@ async function formatApplicationCasesIndexTable(req) {
       req.controllerData.rows = req.controllerData.rows.concat(req.controllerData.mlcases.sort((a, b) => a.createdat > b.createdat ? -1 : 1).map(row => {
         let prediction_result;
         if (row.industry) {
-          prediction_result = numeral(row.prediction).format('0,0.[0]%');
+          prediction_result = `₹${numeral(row.prediction).format('0,0.[0]%')}`;
           prediction_result += ' ADR';
         } else {
           prediction_result = transformhelpers.returnAIDecisionResultData(row).ai_prediction_value;
@@ -3832,7 +3835,7 @@ async function formatIntermediaryApplicationSwimlane(req) {
             teamMemberCount: (application.team_members && application.team_members.length) ? application.team_members.length : 0,
             image: (application.team_members && application.team_members.length && userImageMap[ application.team_members[ 0 ].toString() ]) ? userImageMap[ application.team_members[ 0 ].toString() ] : REACTAPPSETTINGS.default_user_image,
             amountNum: application.loan_amount ? parseFloat(numeral(application.loan_amount)._value) : 0,
-            amount: application.loan_amount ? numeral(application.loan_amount).format('$0,0') : '',
+            amount: application.loan_amount ? `₹${numeral(application.loan_amount).format('0,0')}` : '',
             date: transformhelpers.formatDateNoTime(application.createdat),
             footer: (application.labels && application.labels.length) ? {
               component: 'div',
