@@ -93,7 +93,7 @@
           new Array(100).fill(0).forEach((num) => {
             setTimeout(() => {
               formgroup.formElements[0].value.children[1].props.percent += 1;
-              window.refForm.setState({ formgroups: window.refForm.props.formgroups }, () => {   
+              window.refForm.setState({ formgroups: window.refForm.props.formgroups }, () => {
               });
             }, i * 1000)
           })
@@ -112,13 +112,13 @@
         if (formgroup.formElements && formgroup.formElements[0] && formgroup.formElements[0].value && formgroup.formElements[0].value.children && formgroup.formElements[0].value.children[1]) {
           setTimeout(() => {
             formgroup.formElements[0].value.children[1].props.percent = 0;
-            window.refForm.setState({ formgroups: window.refForm.props.formgroups }, () => {   
+            window.refForm.setState({ formgroups: window.refForm.props.formgroups }, () => {
             });
           }, 0);
           // new Array(100).fill(0).forEach((num) => {
           //   setTimeout(() => {
           //     formgroup.formElements[0].value.children[1].props.percent += 1;
-          //     window.refForm.setState({ formgroups: window.refForm.props.formgroups }, () => {   
+          //     window.refForm.setState({ formgroups: window.refForm.props.formgroups }, () => {
           //     });
           //   }, i * 1000)
           // })
@@ -129,7 +129,7 @@
     }
   }
   window.clearDataProcessing = clearDataProcessing;
-  
+
   function globalBarSaveBtn() {
     let submit = document.querySelector('.global-button-save');
     let guide = document.querySelector('.global-guide-btn');
@@ -636,7 +636,7 @@
             },
           };
           break;
-        case 'machine_learning': 
+        case 'machine_learning':
           window.refForm.props.formgroups[2].gridProps.style = { display: 'none', };
           window.refForm.props.formgroups[3].gridProps.style = { display: 'block', };
           window.refForm.props.formgroups[4].gridProps.style = { display: 'none', };
@@ -682,20 +682,20 @@
     }
     if (evt.format) {
       switch(evt.format) {
-        case 'xml': 
+        case 'xml':
           window.refForm.props.formgroups[ 6 ].formElements[ 0 ].value.props.onclickBaseUrl =  window.refForm.props.formgroups[ 6 ].formElements[ 0 ].value.props.onclickBaseUrl.replace(/:format|json/, 'xml');
           break;
-        case 'json': 
+        case 'json':
           window.refForm.props.formgroups[ 6 ].formElements[ 0 ].value.props.onclickBaseUrl =  window.refForm.props.formgroups[ 6 ].formElements[ 0 ].value.props.onclickBaseUrl.replace(/:format|xml/, 'json');
           break;
       }
     }
     if (evt.type) {
       switch(evt.type) {
-        case 'individual': 
+        case 'individual':
           window.refForm.props.formgroups[ 6 ].formElements[ 0 ].value.props.onclickBaseUrl =  window.refForm.props.formgroups[ 6 ].formElements[ 0 ].value.props.onclickBaseUrl.replace(/:type|batch/, 'individual');
           break;
-        case 'batch': 
+        case 'batch':
           window.refForm.props.formgroups[ 6 ].formElements[ 0 ].value.props.onclickBaseUrl =  window.refForm.props.formgroups[ 6 ].formElements[ 0 ].value.props.onclickBaseUrl.replace(/:type|individual/, 'batch');
           break;
       }
@@ -716,7 +716,7 @@
     }
   }
   window.switchRequestFormat = switchRequestFormat;
-  
+
   function switchResponseFormat(evt) {
     let hiddenFields = {};
     if (window.refForm.props && window.refForm.props.hiddenFields) {
@@ -747,7 +747,7 @@
     });
   }
   window.addOnClickDownloadRequestLink = addOnClickDownloadRequestLink;
-  
+
   function addOnClickDownloadResponseLink() {
     let hiddenFields = {};
     if (window.refForm.props && window.refForm.props.hiddenFields) {
@@ -917,7 +917,7 @@
       'artificialintelligence': {
         on: 'The process will run machine learning models',
         off: 'The process will not run machine learning models',
-      }, 
+      },
       'email': {
         on: 'The process will send emails',
         off: 'The process will not send emails',
@@ -1049,7 +1049,7 @@
     }, 0);
   }
   window.optimizationDataSourceDropdownOnClick = optimizationDataSourceDropdownOnClick;
-  
+
   function optimizationAdvanceMetricsOnClick(e, dropdown) {
     let buttonProp = Object.assign({}, window.refFormContainer.state.navbar, {metric: dropdown.value});
     window.refFormContainer.props.setDynamicData(`optimization${window.refFormContainer.props.formtype}formdata`, {});
@@ -1082,7 +1082,7 @@
     }, 0);
   }
   window.optimizationConfidenceIntervalOnClick = optimizationConfidenceIntervalOnClick;
-  
+
   function optimizationDistributionChartTypeOnClick(e, dropdown) {
     let buttonProp = Object.assign({}, window.refFormContainer.state.navbar, {chart_type: dropdown.value});
     window.refFormContainer.props.setDynamicData(`optimization${window.refFormContainer.props.formtype}formdata`, {});
@@ -1107,7 +1107,7 @@
     // }, 0);
   }
   window.MLAccuracyRateChartTypeFilterOnClick = MLAccuracyRateChartTypeFilterOnClick;
-  
+
   function MLBatchTypeDropdownOnClick(e, dropdown) {
     let current_route = window.overlayProps.getState().routing.locationBeforeTransitions;
     let query = Object.assign({}, current_route.query, {batch_type: dropdown.value});
@@ -1145,7 +1145,7 @@
     window.overlayProps.reduxRouter.push(`${current_route.pathname}?${querystring}`);
   }
   window.reportingFrequencyOnDropdownClick = reportingFrequencyOnDropdownClick;
-  
+
   function reportingFilterCategoryOnDropdownClick(e, dropdown) {
     let current_route = window.overlayProps.getState().routing.locationBeforeTransitions;
     let query = Object.assign({}, current_route.query, {filterCategory: dropdown.value});
@@ -1153,7 +1153,7 @@
     window.overlayProps.reduxRouter.push(`${current_route.pathname}?${querystring}`);
   }
   window.reportingFilterCategoryOnDropdownClick = reportingFilterCategoryOnDropdownClick;
-  
+
   function MLNumBinsDropdownOnClick(e, dropdown) {
     let current_route = window.overlayProps.getState().routing.locationBeforeTransitions;
     let query = Object.assign({}, current_route.query, {num_bins: dropdown.value});
@@ -1185,7 +1185,7 @@
     window.overlayProps.reduxRouter.push(`${current_route.pathname}?${querystring}`);
   }
   window.MLDistributionGranularityOnDropdownClick = MLDistributionGranularityOnDropdownClick;
-  
+
   function MLMinimumScoreOnDropdownClick(e, dropdown) {
     let current_route = window.overlayProps.getState().routing.locationBeforeTransitions;
     let query = Object.assign({}, current_route.query, {minimum_score: dropdown.value});
@@ -1193,7 +1193,7 @@
     window.overlayProps.reduxRouter.push(`${current_route.pathname}?${querystring}`);
   }
   window.MLMinimumScoreOnDropdownClick = MLMinimumScoreOnDropdownClick;
-  
+
   function MLRegressionPlotDropdownOnClick(e, dropdown) {
     let current_route = window.overlayProps.getState().routing.locationBeforeTransitions;
     let query = Object.assign({}, current_route.query, {regressionplot: dropdown.value});
@@ -1311,7 +1311,7 @@
       statusText = document.querySelector('.machine_learningStatus');
       statusText.innerText = 'Inactive';
     }
-    
+
   }
   window.changemachine_learningStatus = changemachine_learningStatus;
 
@@ -1343,7 +1343,7 @@
     }
   }
   window.changerules_engineStatus = changerules_engineStatus;
-  
+
   function changeDocumentCreationStatus(data, status) {
     window.overlayProps.fetchAction.call(this, `/integrations/update_status/document/${data._id}?type=templatedocument`, { method: 'PUT', }, {
       successCallback:  'func:this.props.createNotification',
@@ -1396,9 +1396,9 @@
       document.querySelector('.uploadSecurityCert').style.display = 'block';
     }, 50);
   }
-  
+
   window.hideSecurityCert = hideSecurityCert;
-  
+
   function calculationDropdownOnChange(formElement, event, newvalue){
     if(newvalue.value){
       this.setState({'rule*0*state_property_attribute': newvalue.value});
@@ -2029,7 +2029,7 @@
         const mds = ['dataintegration', 'artificialintelligence', 'email', 'textmessage'];
         let switches = [];
         for (let md of mds){
-          if(currentFormState[`module_skip.file.${md}`]) 
+          if(currentFormState[`module_skip.file.${md}`])
           switches.push({
             component: 'li',
             children: txtswitch[md],
@@ -2054,7 +2054,7 @@
       }, 0);
   }
   window.simulationWarningModal = simulationWarningModal;
-  
+
   function mlAnalysisTabOnClick(location) {
     this.props.setDynamicData(`optimization${location.onclickBaseUrl}data`, {data: {}, _children: {
       optimization_chart_card: [],
@@ -2118,7 +2118,7 @@
               padding: 0,
             },
           },
-        }; 
+        };
     } else{
       return {
         label: 'Data Source',
@@ -2166,7 +2166,7 @@
     window.overlayProps.reduxRouter.push(`/decision/processing/batch/run/${state.value}`)
   }
   window.batchMLRunProcessingOnChange = batchMLRunProcessingOnChange;
-  
+
 
   function batchRunProcessingOnChange(formElement, evt, state){
     window.overlayProps.reduxRouter.push(`/decision/processing/batch/run/${state.value}`)
@@ -2180,12 +2180,12 @@
   //   window.overlayProps.reduxRouter.push(`/optimization/processing/individual/${state.value}`)
   // }
   // window.individualMLRunProcessingOnChange = individualMLRunProcessingOnChange;
-  
+
   function individualMLModelSelection(formElement, evt, state){
     window.overlayProps.reduxRouter.push(`/ml/processing/individual/${state.value}`)
   }
   window.individualMLModelSelection = individualMLModelSelection;
-  
+
 
   function batchMLRunProcessingOnChange(formElement, evt, state){
     window.overlayProps.reduxRouter.push(`/optimization/processing/batch/${state.value}`)
@@ -2233,7 +2233,7 @@
     }, 100)
   }
   window.downloadFileAndClose = downloadFileAndClose;
-  
+
   function boldOverallResultsRow(table){
     let simulation_processing_results_table = document.querySelector('.simulation_processing_results_table');
     if(simulation_processing_results_table && simulation_processing_results_table.lastElementChild && simulation_processing_results_table.lastElementChild.lastElementChild && simulation_processing_results_table.lastElementChild.lastElementChild.firstElementChild && simulation_processing_results_table.lastElementChild.lastElementChild.firstElementChild.innerHTML && simulation_processing_results_table.lastElementChild.lastElementChild.firstElementChild.innerHTML === 'Overall Result'){
@@ -2300,7 +2300,7 @@
     }
   }
   window.changeModelSelection = changeModelSelection;
-  
+
   function removeDisabledClassFromSwitch(){
     let nodeList = document.querySelectorAll(".rc-switch");
     if(nodeList){
@@ -2353,7 +2353,7 @@
 
   var testMaskDollarInput = function(rawValue) {
     return {
-      prefix: '$ ',
+      prefix: '₹ ',
       decimalLimit: 2,
       allowDecimal: true,
       suffix: '' // This will put the dollar sign at the end, with a space.
@@ -2395,7 +2395,7 @@
       };
   }
   window.taxIdInputLimit = taxIdInputLimit;
-    
+
 </script>
 <script type="text/javascript" src="/container/decision-engine-service-container/public/build/bundle.js"></script>
 <script type="text/javascript">

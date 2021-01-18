@@ -1603,7 +1603,7 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
               type: 'maskedinput',
               name: 'loan_amount',
               leftIcon: 'fas fa-rupee-sign',
-              placeholder: '₹',
+              placeholder: undefined,
               createNumberMask: true,
               passProps: {
                 mask: 'func:window.testMaskDollarInput',
