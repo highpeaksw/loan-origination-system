@@ -15,6 +15,7 @@ const Busboy = require('busboy');
 
 async function createApplication(req, res, next) {
   try {
+    console.log('request',req);
     const Application = periodic.datas.get('standard_losapplication');
     const Person = periodic.datas.get('standard_losperson');
     const Company = periodic.datas.get('standard_loscompany');
