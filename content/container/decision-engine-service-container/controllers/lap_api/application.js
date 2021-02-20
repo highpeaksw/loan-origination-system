@@ -6,6 +6,7 @@ const flatten = require('flat');
 
 async function createApplication(req, res, next) {
   try {
+    console.log(req);
     req.controllerData = req.controllerData || {};
     if (req.message) throw new Error(req.message);
     const Application = periodic.datas.get('standard_losapplication');
