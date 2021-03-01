@@ -344,7 +344,7 @@ async function updateApplication(req, res, next) {
             query: { _id: req.params.id, },
             updatedoc: req.body,
         };
-        const response = await fetch(`http://192.168.43.36:8080/v1/rest/digify/can_move_status_of_app?source_index=${application.status}&destination_index=${req.body.status}`);
+        const response = await fetch(`http://192.168.43.36:10000/v1/rest/digify/can_move_status_of_app?source_index=${application.status}&destination_index=${req.body.status}`);
         const logResponse = await response.json();
         if(!logResponse.result.canMove) {
             return res.status(400).send({ message: logResponse.result.reason});
