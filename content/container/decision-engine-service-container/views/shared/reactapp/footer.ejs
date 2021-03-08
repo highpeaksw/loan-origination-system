@@ -181,8 +181,21 @@
       window.setTimeout(function () {
         if (!self.props.reduxRouter) window.overlayProps.hideModal('last');
         window.overlayProps.reduxRouter.push(redirect);
-      }, 0);
+      }, 0);      
+    }   
+    if (window.location.pathname === "/los/applicationsdashboard") {
+    function removeSymbol() {
+      window.setTimeout(function() {
+        if (document.getElementsByClassName("__re-bulma_card-header").length) {
+          for (var i = 0; i < document.getElementsByClassName("__re-bulma_card-header").length; i++) {
+            document.getElementsByClassName("__re-bulma_card-header")[i].children[0].children[1].innerHTML = document.getElementsByClassName("__re-bulma_card-header")[i].children[0].children[1].innerHTML.replace("$", "₹")
+          }
+        } else
+          removeSymbol()
+      }, 50)
     }
+    removeSymbol()
+  }
   }
   window.redirect = redirect;
 
