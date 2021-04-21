@@ -2058,10 +2058,10 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                       style: styles.buttonCellStyle,
                     },
                     buttons: [{
-                      passProps: {
+                      passProps: {                        
                         buttonProps: {
                           icon: 'fa fa-pencil',
-                          className: '__icon_button',
+                          className: '__icon_button hidden',                          
                         },
                         onClick: 'func:this.props.createModal',
                         onclickProps: {
@@ -2070,12 +2070,13 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                           params: [{ key: ':id', val: '_id', }, { key: ':idx', val: 'idx', }, ],
                         },
                       },
-                    }, {
+                    },
+                     {
                       passProps: {
                         buttonProps: {
                           icon: 'fa fa-trash',
                           color: 'isDanger',
-                          className: '__icon_button',
+                          className: '__icon_button hidden'                          
                         },
                         onClick: 'func:this.props.fetchAction',
                         onclickBaseUrl: '/los/api/applications/:id/key_information/:idx?type=delete_loan_info',
@@ -2107,8 +2108,10 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                           }, ],
                         }),
                       },
-                    }, ],
-                  }, ],
+                      }, 
+                    ],
+                  },
+                  ],
                 },
               },
             }, {

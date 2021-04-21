@@ -183,6 +183,9 @@
     color: inherit;
     font-size: 18px;
   }
+  &.hidden{
+    display: none !important;
+  }
 }
 .__re-bulma_button.__icon_button:hover,
 .__re-bulma_pagination .__re-bulma_button:hover,
