@@ -231,7 +231,7 @@ module.exports = {
                           },
                         },
 
-                        {
+                        /* {
                           type: 'maskedinput',
                           name: 'ssn',
                           label: 'Social Security Number',
@@ -244,7 +244,9 @@ module.exports = {
                             autoCapitalize: 'off',
                             spellCheck: false,
                           },
-                        }, {
+                        }, */
+
+                        {
                           type: 'group',
                           groupElements: [ {
                             type: 'text',
@@ -331,6 +333,7 @@ module.exports = {
                                     columnProps: {
                                       style: styles.buttonCellStyle,
                                     },
+                                    /*
                                     buttons: [ {
                                       passProps: {
                                         buttonProps: {
@@ -394,6 +397,7 @@ module.exports = {
                                         }),
                                       },
                                     }, ],
+                                    */
                                   }, ],
                                 },
                               }, {
@@ -479,6 +483,7 @@ module.exports = {
                                         whiteSpace: 'nowrap',
                                       },
                                     },
+                                    /*
                                     buttons: [ {
                                       passProps: {
                                         buttonProps: {
@@ -493,7 +498,8 @@ module.exports = {
                                         }, ],
                                       },
                                     }, ],
-                                  } ],
+                                    */
+                                  }, ],
                                 },
                               }, ],
                             }, ]

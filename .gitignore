@@ -64,3 +64,6 @@ otherdocs/
 content/config/deployment/ecosystem.json
 pm2.json
 security_certificates
+
+.vscode/
+package-lock.json

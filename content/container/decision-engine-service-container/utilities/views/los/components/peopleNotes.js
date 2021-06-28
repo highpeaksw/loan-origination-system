@@ -121,7 +121,9 @@ module.exports = {
           columnProps: {
             style: styles.buttonCellStyle,
           },
-          buttons: [ {
+          buttons: [
+            /*
+            {
             passProps: {
               buttonProps: {
                 icon: 'fa fa-pencil',
@@ -133,7 +135,7 @@ module.exports = {
                 pathname: '/los/notes/:id',
                 params: [ { 'key': ':id', 'val': '_id', } ],
               },
-            },
+          },
           }, {
             passProps: {
               buttonProps: {
@@ -173,6 +175,7 @@ module.exports = {
               }),
             },
           },
+          */
           ],
         }, ],
       },

@@ -181,8 +181,8 @@
       window.setTimeout(function () {
         if (!self.props.reduxRouter) window.overlayProps.hideModal('last');
         window.overlayProps.reduxRouter.push(redirect);
-      }, 0);      
-    }   
+      }, 0);
+    }
     if (window.location.pathname === "/los/applicationsdashboard") {
     function removeSymbol() {
       window.setTimeout(function() {
@@ -265,7 +265,7 @@
   window.pushToNewRoute = pushToNewRoute;
 
   function phoneNumberFormatter() {
-    return [ '(', /[1-9]/, /\d/, /\d/, ')', '\u0020', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/ ];
+    return [ /[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/ ];
   }
   window.phoneNumberFormatter = phoneNumberFormatter;
 
@@ -2355,7 +2355,7 @@
   window.submitWithLoaderCallback = submitWithLoaderCallback;
 
   function phoneNumberFormatter (){
-     return ['(', /[1-9]/, /\d/, /\d/, ')', '\u2000', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+     return [/[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
   }
   window.phoneNumberFormatter = phoneNumberFormatter;
 

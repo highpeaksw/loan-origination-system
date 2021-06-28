@@ -185,7 +185,7 @@ function _generateCreateTaskManifest(customer_type) {
               component: 'span',
               children: [ {
                 component: 'span',
-                children: 'Team Members',
+                children: 'Created By',
               }, {
                 component: 'span',
                 children: 'Optional',
@@ -468,7 +468,7 @@ function _generateEditTaskManifest(customer_type) {
               component: 'span',
               children: [ {
                 component: 'span',
-                children: 'Team Members',
+                children: 'Created By',
               }, {
                 component: 'span',
                 children: 'Optional',
@@ -1375,7 +1375,7 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
       type: 'singleDatePicker',
       leftIcon: 'fas fa-calendar-check',
       name: 'estimated_close_date',
-      label: 'Estimated Close Date',
+      label: 'Loan Closure Date',
       passProps: {
         placeholder: '',
         hideKeyboardShortcutsPanel: true,
@@ -1582,7 +1582,7 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
             },
             rightDoubleCardColumn: {
               style: {
-                display: 'flex',
+                display: 'none',
                 width: '100%',
               },
             },
@@ -1591,18 +1591,18 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
               cardStyle: {
               },
             }),
-            rightCardProps: cardprops({
+            /* rightCardProps: cardprops({
               cardTitle: 'Automation Results',
               cardStyle: {
                 marginBottom: 0,
               },
-            }),
+            }), */
           },
           formElements: [{
             formGroupCardLeft: [{
               type: 'maskedinput',
               name: 'loan_amount',
-              leftIcon: 'fas fa-rupee-sign',
+              // leftIcon: 'fas fa-rupee-sign',
               placeholder: undefined,
               createNumberMask: true,
               passProps: {
@@ -1652,7 +1652,7 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                 },
               },
             }),
-            getInputLink({
+            /* getInputLink({
               label: 'Co-Applicant',
               leftIcon: 'fas fa-user',
               baseurl: '/los/:customer_baseurl',
@@ -1664,9 +1664,9 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                   className: '__ra_rb los-input-link',
                 },
               },
-            }),
+            }), */
             {
-              label: 'Team Members',
+              label: 'Created By',
               name: 'team_members',
               leftIcon: 'fas fa-users',
               type: 'dropdown',
@@ -1677,7 +1677,8 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                 search: true,
               },
               options: [],
-            }, {
+            },
+            /* {
               name: 'intermediary',
               label: 'Intermediary',
               type: 'dropdown',
@@ -1692,7 +1693,8 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                 search: true,
                 selectOnBlur: false,
               },
-            }, dateFormElement, {
+            }, */
+            dateFormElement, {
               type: 'group',
               groupElements: [{
                 name: 'createdat',
@@ -1788,7 +1790,8 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                           icon: 'fa fa-download',
                         },
                       }, ],
-                    }, {
+                    },
+                    {
                       passProps: {
                         buttonProps: {
                           icon: 'fa fa-pencil',
@@ -1801,7 +1804,8 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                           'val': 'detail_url',
                         }, ],
                       },
-                    }, {
+                    },
+                    /* {
                       passProps: {
                         buttonProps: {
                           icon: 'fa fa-trash',
@@ -1838,7 +1842,8 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                           }, ],
                         }),
                       },
-                    }, ],
+                    }, */
+                    ],
                   }, ],
                   // },
                 },
@@ -1863,7 +1868,7 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
             doubleCard: true,
             leftDoubleCardColumn: {
               style: {
-                display: 'flex',
+                display: 'none',
                 width: '100%',
 
               },
@@ -1874,12 +1879,12 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                 width: '100%',
               },
             },
-            leftCardProps: cardprops({
+            /* leftCardProps: cardprops({
               cardTitle: 'Application Processing',
               cardStyle: {
                 paddingBottom: 50,
               },
-            }),
+            }), */
             rightCardProps: cardprops({
               cardTitle: 'Loan Information',
               cardStyle: {
@@ -1888,7 +1893,7 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
             }),
           },
           formElements: [{
-            formGroupCardLeft: [{
+            /* formGroupCardLeft: [{
               order: 0,
               type: 'datatable',
               name: 'status_requirements',
@@ -1995,7 +2000,7 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                 },
               },
             }
-            ],
+            ], */
             formGroupCardRight: [{
               type: 'layout',
               value: {
@@ -2057,6 +2062,7 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                     columnProps: {
                       style: styles.buttonCellStyle,
                     },
+                    /*
                     buttons: [{
                       passProps: {
                         buttonProps: {
@@ -2108,6 +2114,7 @@ function _createApplicationDetailPage({ applicationId, application_status, keyIn
                         }),
                       },
                     }, ],
+                    */
                   }, ],
                 },
               },

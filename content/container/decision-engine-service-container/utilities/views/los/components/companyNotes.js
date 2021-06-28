@@ -123,6 +123,7 @@ module.exports = {
               textAlign: 'right',
             }),
           },
+          /*
           buttons: [ {
             passProps: {
               buttonProps: {
@@ -176,6 +177,7 @@ module.exports = {
             },
           },
           ],
+          */
         }, ],
       },
       asyncprops: {
