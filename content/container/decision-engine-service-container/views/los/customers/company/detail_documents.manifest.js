@@ -191,7 +191,8 @@ module.exports = {
                     columnProps: {
                       style: styles.buttonCellStyle,
                     },
-                    buttons: [{
+                    buttons: [
+                      /*{
                       passProps: {
                         buttonProps: {
                           icon: 'fa fa-pencil',
@@ -204,7 +205,7 @@ module.exports = {
                           params: [ { key: ':id', val: '_id', },],
                         },
                       }
-                    }, {
+                    },*/ {
                       passProps: {
                         aProps: {
                           className: '__re-bulma_button __icon_button',
@@ -220,7 +221,7 @@ module.exports = {
                           icon: 'fa fa-download',
                         }
                       }]
-                    }, {
+                    }/*, {
                       passProps: {
                         buttonProps: {
                           icon: 'fa fa-trash',
@@ -258,7 +259,7 @@ module.exports = {
                           ],
                         }),
                       },
-                    },],
+                    },*/],
                   },
                   ],
                 },
