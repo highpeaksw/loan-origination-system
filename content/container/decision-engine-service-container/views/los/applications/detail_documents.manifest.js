@@ -317,7 +317,9 @@ module.exports = {
                     columnProps: {
                       style: styles.buttonCellStyle,
                     },
-                    buttons: [ {
+                    buttons: [ 
+                      /*
+                    {
                       passProps: {
                         buttonProps: {
                           icon: 'fa fa-pencil',
@@ -330,7 +332,7 @@ module.exports = {
                           params: [ { key: ':id', val: '_id', }, { key: ':application_id', val: 'application', } ],
                         },
                       }
-                    },
+                    },*/
                     {
                       passProps: {
                         aProps: {
@@ -347,7 +349,7 @@ module.exports = {
                           icon: 'fa fa-download',
                         }
                       } ]
-                    }, {
+                    }, /*{
                       passProps: {
                         buttonProps: {
                           icon: 'fa fa-trash',
@@ -385,7 +387,7 @@ module.exports = {
                           ],
                         }),
                       },
-                    }, ],
+                    },*/ ],
                   },
                   ],
                 },
